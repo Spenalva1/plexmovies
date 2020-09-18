@@ -1,0 +1,7 @@
+{
+  "name": "plexmovies",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
