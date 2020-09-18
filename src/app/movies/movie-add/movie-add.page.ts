@@ -14,7 +14,7 @@ export class MovieAddPage implements OnInit {
   ngOnInit() {
   }
 
-  saveNewPlace(title, rating, description, imageURL) {
+  saveNewMovie(title, rating, description, imageURL) {
     this.moviesService.addMovie(title.value, rating.value, description.value, imageURL.value);
     this.router.navigate(['/movies'])
   }

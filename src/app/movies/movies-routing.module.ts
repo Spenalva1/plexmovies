@@ -10,11 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'movie-detail',
-    loadChildren: () => import('./movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
+    loadChildren: () => import('./movie-detail/movie-detail.module').then(m => m.MovieDetailPageModule)
   },
   {
     path: 'movie-add',
-    loadChildren: () => import('./movie-add/movie-add.module').then( m => m.MovieAddPageModule)
+    loadChildren: () => import('./movie-add/movie-add.module').then(m => m.MovieAddPageModule)
   }
 ];
 
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MoviesPageRoutingModule {}
+export class MoviesPageRoutingModule { }

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button size="large" defaultHref="/movies"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit a movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="fixed">Title</ion-label>
+            <ion-input #title value="{{movie.title}}" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Rate</ion-label>
+            <ion-range #rating min="1" value="{{movie.rating}}" max="5" step="1" snaps="true" ticks="true"
+              color="secondary">
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Description</ion-label>
+            <ion-textarea value="{{movie.description}}" #description></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Image (URL)</ion-label>
+            <ion-input #imageURL value="{{movie.imageURL}}" type="text"></ion-input>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed"
+    (click)="editMovie(movie.id, title, rating, description, imageURL)">
+    <ion-fab-button color="dark">
+      <ion-icon size="large" name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

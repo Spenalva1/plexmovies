@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: 'new-movie',
     loadChildren: () => import('./movies/movie-add/movie-add.module').then(m => m.MovieAddPageModule),
-  }
+  },
+  {
+    path: 'movie-edit/:movieId',
+    loadChildren: () => import('./movies/movie-edit/movie-edit.module').then(m => m.MovieEditPageModule),
+  },
 ];
 
 @NgModule({

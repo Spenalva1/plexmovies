@@ -67,4 +67,15 @@ export class MoviesService {
     })
   }
 
+  updateMovie(id: string, title: string, rating: number, description: string, imageURL: string) {
+    const index = this.movies.findIndex(movie => {
+      return movie.id === id
+    })
+    this.movies[index].title = title;
+    this.movies[index].rating = rating;
+    this.movies[index].description = description;
+    this.movies[index].imageURL = imageURL;
+  }
+
+
 }

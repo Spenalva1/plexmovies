@@ -7,33 +7,42 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-card class="movie" *ngFor="let movie of movies" [routerLink]="['/movies', movie.id]">
-      <ion-grid class="ion-no-padding">
-        <ion-row>
+  <ion-list class=" ion-padding">
 
-          <ion-col size="6" class="poster-col">
-            <img class="poster" src="{{ movie.imageURL }}" alt="">
-          </ion-col>
+    <ion-item-sliding class="movie ion-no-padding ion-margin-bottom" *ngFor="let movie of movies">
+      <ion-item class="ion-no-padding" [routerLink]="['/movies', movie.id]">
+        <ion-grid class="ion-no-padding">
+          <ion-row>
 
-          <ion-col size="6" class="ion-padding movie-info">
-            <ion-card-title color="light">{{ movie.title }}</ion-card-title>
-            <p>{{movie.description}}</p>
-            <div class="rating">
-              <ion-label color="light">Rate</ion-label><br>
-              <div class="stars">
-                <ion-icon color="light" name="star-outline"> </ion-icon>
-                <ion-icon color="light" name="star-outline"> </ion-icon>
-                <ion-icon color="light" name="star-outline"> </ion-icon>
-                <ion-icon color="light" name="star-outline"> </ion-icon>
-                <ion-icon color="light" name="star-outline"> </ion-icon>
+            <ion-col size="6" class="poster-col">
+              <img class="poster" src="{{ movie.imageURL }}" alt="">
+            </ion-col>
+
+            <ion-col size="6" class="ion-padding movie-info">
+              <ion-card-title color="light">{{ movie.title }}</ion-card-title>
+              <p>{{movie.description}}</p>
+              <div class="rating">
+                <ion-label color="light">Rate</ion-label><br>
+                <div class="stars">
+                  <ion-icon color="light" name="star-outline"> </ion-icon>
+                  <ion-icon color="light" name="star-outline"> </ion-icon>
+                  <ion-icon color="light" name="star-outline"> </ion-icon>
+                  <ion-icon color="light" name="star-outline"> </ion-icon>
+                  <ion-icon color="light" name="star-outline"> </ion-icon>
+                </div>
               </div>
-            </div>
-          </ion-col>
+            </ion-col>
 
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="success shade" id="edit" [routerLink]="['/movie-edit', movie.id]">
+          <ion-label id="edit">Edit</ion-label>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed" (click)="addMovie()">
     <ion-fab-button color="dark">
