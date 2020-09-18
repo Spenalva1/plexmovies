@@ -1,0 +1,40 @@
+ion-toolbar{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ion-title{
+    font-size: 1.5rem;
+}
+
+ion-card{
+    background-color: #AFAFAF;
+    padding: 0;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.poster-col{
+    display: flex;
+    align-items: center;
+    height: 200px;
+}
+
+.poster{
+    width:  300px;
+}
+
+p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px!important;
+    color: black
+}
+
+.movie-info{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

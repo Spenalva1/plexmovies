@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button size="large" defaultHref="/movies"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add a new movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input #title type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Rate</ion-label>
+            <ion-range #rating min="1" max="5" step="1" snaps="true" ticks="true" color="secondary"></ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea #description></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Image (URL)</ion-label>
+            <ion-input #imageURL type="text"></ion-input>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed"
+    (click)="saveNewPlace(title, rating, description, imageURL)">
+    <ion-fab-button color="dark">
+      <ion-icon size="large" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

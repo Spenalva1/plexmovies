@@ -1,0 +1,18 @@
+ion-grid{
+    --padding: 0;
+}
+
+ion-back-button{
+    color: white;
+}
+
+.movie-image{
+    height: 200px;
+    overflow: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+ion-content{
+    font-size: 20px;
+}
