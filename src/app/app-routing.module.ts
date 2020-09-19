@@ -32,6 +32,14 @@ const routes: Routes = [
     path: 'movie-edit/:movieId',
     loadChildren: () => import('./movies/movie-edit/movie-edit.module').then(m => m.MovieEditPageModule),
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
+  },
 ];
 
 @NgModule({
