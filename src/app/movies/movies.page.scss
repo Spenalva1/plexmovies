@@ -42,7 +42,7 @@ p{
 
 .movie-info{
     background-color: #AFAFAF;
-    height: 200px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,4 +54,20 @@ p{
 
 #edit{
     color: #ffffff;
+}
+
+ion-text{
+    height: 98px;
+    overflow: hidden;
+}
+
+p{
+    margin: 0;
+}
+
+.poster-col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
 }
