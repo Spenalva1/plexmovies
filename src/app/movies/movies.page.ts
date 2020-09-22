@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MoviesService } from './movies.service'
+import { Movie } from './movie.model'
 
 @Component({
   selector: 'app-movies',
@@ -9,16 +10,14 @@ import { MoviesService } from './movies.service'
 })
 export class MoviesPage implements OnInit {
 
-  private movies = [];
-
   constructor(private movieService: MoviesService, private router: Router) { }
 
   ngOnInit() {
-    this.movies = this.movieService.getMovies();
+    this.movieService.getSavedMovies();
   }
 
-  ionViewWillEnter() {
-    this.movies = this.movieService.getMovies();
+  async ionViewDidEnter() {
+    this.movieService.getSavedMovies();
   }
 
   addMovie() {

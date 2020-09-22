@@ -30,7 +30,7 @@ ion-card{
 }
 
 .poster{
-    width:  300px;
+    height:  200px;
 }
 
 p{
@@ -42,7 +42,7 @@ p{
 
 .movie-info{
     background-color: #AFAFAF;
-    height: 250px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -61,13 +61,9 @@ ion-text{
     overflow: hidden;
 }
 
-p{
-    margin: 0;
-}
-
 .poster-col{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: 200px;
 }

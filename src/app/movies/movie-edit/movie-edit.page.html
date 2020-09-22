@@ -27,8 +27,7 @@
             <ion-textarea value="{{movie.description}}" #description></ion-textarea>
           </ion-item>
           <ion-item>
-            <ion-label position="fixed">Image (URL)</ion-label>
-            <ion-input #imageURL value="{{movie.imageURL}}" type="text"></ion-input>
+            <ion-button color="primary" (click)="this.getImage()">Image</ion-button>
           </ion-item>
 
         </ion-card-content>
@@ -36,7 +35,7 @@
     </ion-col>
   </ion-row>
   <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed"
-    (click)="editMovie(movie.id, title, rating, description, imageURL)">
+    (click)="editMovie(movie.id, title, rating, description, newImage)">
     <ion-fab-button color="dark">
       <ion-icon size="large" name="create"></ion-icon>
     </ion-fab-button>

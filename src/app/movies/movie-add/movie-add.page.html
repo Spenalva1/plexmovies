@@ -25,16 +25,15 @@
             <ion-textarea #description></ion-textarea>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Image (URL)</ion-label>
-            <ion-input #imageURL type="text"></ion-input>
+            <ion-button color="primary" (click)="this.getImage()">Image</ion-button>
           </ion-item>
 
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
-  <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed"
-    (click)="saveNewMovie(title, rating, description, imageURL)">
+  <ion-fab color=" dark" vertical="bottom" horizontal="center" slot="fixed"
+    (click)="saveNewMovie(title, rating, description)">
     <ion-fab-button color="dark">
       <ion-icon size="large" name="add"></ion-icon>
     </ion-fab-button>
