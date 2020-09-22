@@ -6,7 +6,11 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      menu stuff
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item routerLink='/login' menuClose>Log In</ion-item>
+        </ion-menu-toggle>
+      </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="content1" main></ion-router-outlet>
