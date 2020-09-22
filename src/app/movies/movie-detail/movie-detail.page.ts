@@ -17,7 +17,7 @@ export class MovieDetailPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      const recipeId = paramMap.get('movieId');
+      const recipeId = parseInt(paramMap.get('movieId'));
       this.movie = this.movieService.getMovieById(recipeId);
     })
   }

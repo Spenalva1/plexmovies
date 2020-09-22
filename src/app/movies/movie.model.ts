@@ -1,6 +1,6 @@
 import { Image } from './image.model'
 export interface Movie {
-    id: string;
+    id: number;
     title: string;
     rating: number;
     description: string;

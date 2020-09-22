@@ -75,7 +75,7 @@ export class MoviesService {
     }
   }
 
-  getMovieById(movieId: string) {
+  getMovieById(movieId: number) {
     return {
       ...this.movies.find(movie => {
         return movie.id === movieId;
@@ -84,12 +84,13 @@ export class MoviesService {
   }
 
   addMovie(title: string, rating: number, description: string, image: Image) {
+    const id = new Date().getTime();
     this.movies.push({
       title,
       rating,
       description,
       image,
-      id: this.movies.length + 1 + ""
+      id: id,
     });
     Storage.set({
       key: this.MOVIE_STORAGE,
@@ -97,21 +98,24 @@ export class MoviesService {
     });
   }
 
-  async removeMovie(movieId: string) {
-    const removing = this.movies.find(movie => {
-      return movie.id = movieId;
-    });
-
-    const filename = removing.image.filepath.substr(removing.image.filepath.lastIndexOf('/') + 1);
+  async removeImage(image: Image) {
+    const filename = image.filepath.substr(image.filepath.lastIndexOf('/') + 1);
     await Filesystem.deleteFile({
       path: filename,
       directory: FilesystemDirectory.Data
     })
+  }
+
+  async removeMovie(movieId: number) {
+    const removing = this.movies.find(movie => {
+      return movie.id === movieId;
+    });
+
+    await this.removeImage(removing.image);
 
     this.movies = this.movies.filter(movie => {
       return movie.id !== movieId
     });
-
 
     Storage.set({
       key: this.MOVIE_STORAGE,
@@ -177,16 +181,16 @@ export class MoviesService {
     }
   }
 
-  updateMovie(id: string, title: string, rating: number, description: string, image: Image) {
-
-    console.log(id);
-
-
+  updateMovie(id: number, title: string, rating: number, description: string, image: Image) {
     const index = this.movies.findIndex(movie => { return movie.id === id });
     this.movies[index].title = title;
     this.movies[index].rating = rating;
     this.movies[index].description = description;
     this.movies[index].image = image;
+    Storage.set({
+      key: this.MOVIE_STORAGE,
+      value: JSON.stringify(this.movies)
+    });
   }
 
 

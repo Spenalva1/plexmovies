@@ -34,19 +34,19 @@ export class MovieAddPage implements OnInit {
     });
   }
 
-  async presentToast() {
+  async presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       position: 'top',
-      message: 'You have to choose an image.',
+      message: message,
       duration: 3000,
-      color: 'danger'
+      color: color,
     });
     toast.present();
   }
 
   async saveNewMovie(title, rating, description) {
     if (!this.image) {
-      this.presentToast();
+      this.presentToast("You have to choose an image.", "danger");
       return;
     }
     const savedImageFile = await this.moviesService.savePicture(this.image);
