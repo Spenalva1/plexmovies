@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MoviesPageRoutingModule } from './movies-routing.module';
 
 import { MoviesPage } from './movies.page';
+import { StarRatingModule } from 'ionic5-star-rating';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MoviesPageRoutingModule
+    MoviesPageRoutingModule,
+    StarRatingModule,
   ],
   declarations: [MoviesPage]
 })
-export class MoviesPageModule {}
+export class MoviesPageModule { }

@@ -18,9 +18,10 @@
           </ion-item>
           <ion-item>
             <ion-label>Rate</ion-label>
-            <ion-range #rating min="1" value="{{movie.rating}}" max="5" step="1" snaps="true" ticks="true"
-              color="secondary">
-            </ion-range>
+            <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#FFFFFF"
+              defaultColor="#FFFFFF" readonly="false" rating="{{movie.rating}}" fontSize="32px"
+              (ratingChanged)="logRatingChange($event)">
+            </ionic5-star-rating>
           </ion-item>
           <ion-item>
             <ion-label position="fixed">Description</ion-label>
@@ -35,7 +36,7 @@
     </ion-col>
   </ion-row>
   <ion-fab color="dark" vertical="bottom" horizontal="center" slot="fixed"
-    (click)="editMovie(movie.id, title, rating, description)">
+    (click)="editMovie(movie.id, title, description)">
     <ion-fab-button color="dark">
       <ion-icon size="large" name="create"></ion-icon>
     </ion-fab-button>

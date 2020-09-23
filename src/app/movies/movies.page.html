@@ -26,13 +26,10 @@
               <ion-text>{{movie.description}}</ion-text>
               <div class="rating">
                 <ion-label color="light">Rate</ion-label>
-                <div class="stars">
-                  <ion-icon color="light" name="star-outline"> </ion-icon>
-                  <ion-icon color="light" name="star-outline"> </ion-icon>
-                  <ion-icon color="light" name="star-outline"> </ion-icon>
-                  <ion-icon color="light" name="star-outline"> </ion-icon>
-                  <ion-icon color="light" name="star-outline"> </ion-icon>
-                </div>
+                <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#000000"
+                  defaultColor="#000000" readonly="true" rating="{{movie.rating}}" fontSize="18px"
+                  (ratingChanged)="logRatingChange($event)">
+                </ionic5-star-rating>
               </div>
             </ion-col>
 

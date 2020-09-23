@@ -19,6 +19,7 @@ export class MovieEditPage implements OnInit {
 
   private movie: Movie;
   private newImage;
+  private selectedRating: number;
 
   constructor(private activatedRoute: ActivatedRoute, private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
 
@@ -27,6 +28,11 @@ export class MovieEditPage implements OnInit {
       const recipeId = parseInt(paramMap.get('movieId'));
       this.movie = this.moviesService.getMovieById(recipeId);
     })
+    this.selectedRating = this.movie.rating;
+  }
+
+  logRatingChange(rating) {
+    this.selectedRating = rating;
   }
 
   async getImage() {
@@ -48,7 +54,7 @@ export class MovieEditPage implements OnInit {
   }
 
 
-  async editMovie(id: number, title, rating, description) {
+  async editMovie(id: number, title, description) {
     if (!title.value.length) {
       this.presentToast("You have to enter a title.", "danger");
       return
@@ -56,9 +62,9 @@ export class MovieEditPage implements OnInit {
     if (this.newImage) {
       this.moviesService.removeImage(this.movie.image);
       const savedImageFile = await this.moviesService.savePicture(this.newImage);
-      this.moviesService.updateMovie(id, title.value, rating.value, description.value, savedImageFile);
+      this.moviesService.updateMovie(id, title.value, this.selectedRating, description.value, savedImageFile);
     } else {
-      this.moviesService.updateMovie(id, title.value, rating.value, description.value, this.movie.image);
+      this.moviesService.updateMovie(id, title.value, this.selectedRating, description.value, this.movie.image);
     }
     this.router.navigate(['/movies']);
   }

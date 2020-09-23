@@ -19,6 +19,7 @@ const { Camera, Filesystem, Storage } = Plugins;
 export class MovieAddPage implements OnInit {
 
   private image;
+  private selectedRating: number = 1;
 
   constructor(private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
 
@@ -44,7 +45,11 @@ export class MovieAddPage implements OnInit {
     toast.present();
   }
 
-  async saveNewMovie(title, rating, description) {
+  logRatingChange(rating) {
+    this.selectedRating = rating;
+  }
+
+  async saveNewMovie(title, description) {
     if (!this.image) {
       this.presentToast("You have to choose an image.", "danger");
       return
@@ -54,7 +59,7 @@ export class MovieAddPage implements OnInit {
       return
     }
     const savedImageFile = await this.moviesService.savePicture(this.image);
-    this.moviesService.addMovie(title.value, rating.value, description.value, savedImageFile);
+    this.moviesService.addMovie(title.value, this.selectedRating, description.value, savedImageFile);
     this.router.navigate(['/movies'])
   }
 }
