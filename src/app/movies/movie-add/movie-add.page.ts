@@ -47,7 +47,11 @@ export class MovieAddPage implements OnInit {
   async saveNewMovie(title, rating, description) {
     if (!this.image) {
       this.presentToast("You have to choose an image.", "danger");
-      return;
+      return
+    }
+    if (!title.value.length) {
+      this.presentToast("You have to enter a title.", "danger");
+      return
     }
     const savedImageFile = await this.moviesService.savePicture(this.image);
     this.moviesService.addMovie(title.value, rating.value, description.value, savedImageFile);

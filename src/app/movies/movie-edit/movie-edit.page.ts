@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Image } from '../image.model';
 import { Movie } from '../movie.model';
@@ -19,7 +20,7 @@ export class MovieEditPage implements OnInit {
   private movie: Movie;
   private newImage;
 
-  constructor(private activatedRoute: ActivatedRoute, private moviesService: MoviesService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -36,7 +37,22 @@ export class MovieEditPage implements OnInit {
     });
   }
 
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      position: 'top',
+      message: message,
+      duration: 3000,
+      color: color,
+    });
+    toast.present();
+  }
+
+
   async editMovie(id: number, title, rating, description) {
+    if (!title.value.length) {
+      this.presentToast("You have to enter a title.", "danger");
+      return
+    }
     if (this.newImage) {
       this.moviesService.removeImage(this.movie.image);
       const savedImageFile = await this.moviesService.savePicture(this.newImage);
@@ -47,3 +63,5 @@ export class MovieEditPage implements OnInit {
     this.router.navigate(['/movies']);
   }
 }
+
+
