@@ -8,7 +8,11 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item routerLink='/login' menuClose>Log In</ion-item>
+          <ion-item *ngIf="user$ | async as user; else log_in" routerLink (click)="onLogout()" menuClose>Log out
+          </ion-item>
+          <ng-template #log_in>
+            <ion-item routerLink='/login' menuClose>Log In</ion-item>
+          </ng-template>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

@@ -3,36 +3,48 @@
     <ion-buttons slot="start">
       <ion-back-button size="large" defaultHref="/movies"></ion-back-button>
     </ion-buttons>
-    <ion-title>LogIn</ion-title>
+    <ion-title class="">Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-content padding>
-    <form #form="ngForm" (ngSubmit)="login(form)">
-      <ion-grid>
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <div padding>
-              <ion-item>
-                <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-              </ion-item>
-            </div>
-            <div padding>
-              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <div text-center>
-            If you don't have an account, please <a routerLink='/register'>
-              register</a> first!
-          </div>
-        </ion-row>
-      </ion-grid>
-    </form>
-  </ion-content>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" #password required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" (click)="onLogin(email, password)" expand="block" fill="solid">
+          Log In
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <span class="span-divider">or</span>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onLoginGoogle()" color="danger" expand="block" fill="solid">
+          Log In with Google
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>
+          <a [routerLink]="['/forgot-password']">Forgot password?</a>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>
+          <a [routerLink]="['/register']">Create an account.</a>
+        </p>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button size="large" defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Email verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user$ | async as user">
+  <ion-row>
+    <ion-col>
+      <h2>Thank you for Registering!</h2>
+      <p>We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
+      <p>Please check your email and click on the link to verify your email addres.</p>
+    </ion-col>
+  </ion-row>
+  <ion-button type="submit" (click)="onSendEmail()" expand="block">Resend verification email</ion-button>
+</ion-content>

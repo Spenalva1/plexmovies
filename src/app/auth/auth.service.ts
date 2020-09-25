@@ -1,56 +1,106 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
-
-import { Storage } from '@ionic/storage';
-import { User } from './user';
-import { AuthResponse } from './auth-response';
+import { User } from "./user";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { auth } from 'firebase';
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { Observable, of } from "rxjs";
+import { switchMap } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  public user$: Observable<User>;
 
-  AUTH_SERVER_ADDRESS: string = 'http://localhost:3000';
-  authSubject = new BehaviorSubject(false);
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private toastController: ToastController) {
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        }
+        return of(null);
+      })
+    )
+  }
 
-  constructor(private httpClient: HttpClient, private storage: Storage) { }
+  async errorToast(message) {
+    const toast = await this.toastController.create({
+      position: 'top',
+      message: message,
+      duration: 3000,
+      color: "danger",
+    });
+    toast.present();
+  }
 
-  // register(user: User): Observable<AuthResponse> {
-  //   return this.httpClient.post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
-  //     tap(async (res: AuthResponse) => {
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.afAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
 
-  //       if (res.user) {
-  //         await this.storage.set("ACCESS_TOKEN", res.user.access_token);
-  //         await this.storage.set("EXPIRES_IN", res.user.expires_in);
-  //         this.authSubject.next(true);
-  //       }
-  //     })
+  async loginGoogle(): Promise<User> {
+    try {
+      const { user } = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+      this.updateUserData(user);
+      return user;
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
 
-  //   );
-  // }
+  async sendVerificationEmail(): Promise<void> {
+    try {
+      return (await this.afAuth.currentUser).sendEmailVerification();
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
 
-  // login(user: User): Observable<AuthResponse> {
-  //   return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
-  //     tap(async (res: AuthResponse) => {
+  isEmailVerified(user: User) {
+    return user.emailVerified === true ? true : false;
+  }
 
-  //       if (res.user) {
-  //         await this.storage.set("ACCESS_TOKEN", res.user.access_token);
-  //         await this.storage.set("EXPIRES_IN", res.user.expires_in);
-  //         this.authSubject.next(true);
-  //       }
-  //     })
-  //   );
-  // }
+  async register(email: string, password: string): Promise<User> {
+    try {
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      await this.sendVerificationEmail();
+      return user;
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
 
-  // async logout() {
-  //   await this.storage.remove("ACCESS_TOKEN");
-  //   await this.storage.remove("EXPIRES_IN");
-  //   this.authSubject.next(false);
-  // }
+  async login(email: string, password: string): Promise<User> {
+    try {
+      const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.updateUserData(user);
+      return user;
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
 
-  // isLoggedIn() {
-  //   return this.authSubject.asObservable();
-  // }
+  async logout(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      this.errorToast(error.message);
+    }
+  }
+
+  private updateUserData(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      displayName: user.displayName
+    }
+    return userRef.set(data, { merge: true });
+  }
+
 }
