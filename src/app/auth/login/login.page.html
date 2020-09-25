@@ -8,8 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
+  <form id="loginForm" class="ion-padding">
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="avatar-col">
+        <ion-avatar>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" #email required></ion-input>
     </ion-item>
@@ -17,26 +24,23 @@
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" #password required></ion-input>
     </ion-item>
+    <ion-button class="ion-margin-top" id="btnLogin" type="submit" color="medium" (click)="onLogin(email, password)"
+      expand="block" fill="solid">
+      <span class="white ion-padding">Log In</span>
+    </ion-button>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" (click)="onLogin(email, password)" expand="block" fill="solid">
-          Log In
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <p>
-          <a [routerLink]="['/forgot-password']">Forgot password?</a>
-        </p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <p>
-          <a [routerLink]="['/register']">Create an account.</a>
+        <p class="ion-text-center">
+          <a class="white" [routerLink]="['/register']">Create account.</a>
         </p>
       </ion-col>
     </ion-row>
   </form>
+  <ion-row id="forgotRow">
+    <ion-col>
+      <p class="ion-text-center">
+        <a class="white" [routerLink]="['/forgot-password']">Forgot password?</a>
+      </p>
+    </ion-col>
+  </ion-row>
 </ion-content>

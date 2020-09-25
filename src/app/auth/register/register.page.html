@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form>
+  <form id="loginForm" class="ion-padding">
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" #email required></ion-input>
@@ -19,17 +19,18 @@
     </ion-item>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" (click)="onRegister(email, password)" expand="block" fill="solid">
-          Register
+        <ion-button class="ion-margin-top" id="btnRegister" type="submit" color="medium"
+          (click)="onRegister(email, password)" expand="block" fill="solid">
+          <span class="white ion-padding">Register</span>
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col>
-        <p>
-          <a [routerLink]="['/login']">Already have an account?</a>
-        </p>
-      </ion-col>
-    </ion-row>
   </form>
+  <ion-row id="existingRow">
+    <ion-col>
+      <p class="ion-text-center">
+        <a class="white" [routerLink]="['/login']">Already have an account?</a>
+      </p>
+    </ion-col>
+  </ion-row>
 </ion-content>

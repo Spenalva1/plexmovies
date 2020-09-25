@@ -1,4 +1,41 @@
-.span-divider{
-    display: block;
-    text-align: center;
+#loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 56px);
+    position: relative;
+}
+
+.avatar-col{
+    display: flex;
+    justify-content: center;
+}
+
+ion-avatar{
+    height: 150px;
+    width: 150px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#forgotRow{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#btnLogin{
+    height: 55px;
+    border-radius: 50px;
+}
+
+.white{
+    color: #ffffff;
+}
+
+ion-item{
+    border-radius: 50px;
+    margin-bottom: 10px;
 }
