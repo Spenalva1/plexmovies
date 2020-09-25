@@ -42,16 +42,6 @@ export class AuthService {
     }
   }
 
-  async loginGoogle(): Promise<User> {
-    try {
-      const { user } = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
-      this.updateUserData(user);
-      return user;
-    } catch (error) {
-      this.errorToast(error.message);
-    }
-  }
-
   async sendVerificationEmail(): Promise<void> {
     try {
       return (await this.afAuth.currentUser).sendEmailVerification();

@@ -26,17 +26,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async onLoginGoogle() {
-    try {
-      const user = await this.authService.loginGoogle();
-      if (user) {
-        this.redirectUser(this.authService.isEmailVerified(user));
-      }
-    } catch (error) {
-      console.log('Error->', error);
-    }
-  }
-
   redirectUser(isVerified: boolean) {
     if (isVerified) {
       this.router.navigate(['movies']);
