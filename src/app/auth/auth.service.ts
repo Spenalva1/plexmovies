@@ -21,7 +21,7 @@ export class AuthService {
         }
         return of(null);
       })
-    )
+    );
   }
 
   async errorToast(message) {

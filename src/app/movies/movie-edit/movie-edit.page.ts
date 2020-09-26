@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Image } from '../image.model';
+import { Image } from '../../image.model';
 import { Movie } from '../movie.model';
 import { MoviesService } from '../movies.service';
 import {
   Plugins, CameraResultType, Capacitor, FilesystemDirectory,
   CameraPhoto, CameraSource
 } from '@capacitor/core';
+import { ImageService } from 'src/app/image.service';
 const { Camera, Filesystem, Storage } = Plugins;
 
 @Component({
@@ -21,7 +22,7 @@ export class MovieEditPage implements OnInit {
   private newImage;
   private selectedRating: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
+  constructor(private activatedRoute: ActivatedRoute, private moviesService: MoviesService, private router: Router, public toastController: ToastController, private imageService: ImageService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -60,8 +61,8 @@ export class MovieEditPage implements OnInit {
       return
     }
     if (this.newImage) {
-      this.moviesService.removeImage(this.movie.image);
-      const savedImageFile = await this.moviesService.savePicture(this.newImage);
+      this.imageService.removeImage(this.movie.image);
+      const savedImageFile = await this.imageService.savePicture(this.newImage);
       this.moviesService.updateMovie(id, title.value, this.selectedRating, description.value, savedImageFile);
     } else {
       this.moviesService.updateMovie(id, title.value, this.selectedRating, description.value, this.movie.image);

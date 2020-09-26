@@ -3,13 +3,11 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MoviesService } from '../movies.service';
 import {
-  Plugins, CameraResultType, Capacitor, FilesystemDirectory,
-  CameraPhoto, CameraSource
+  Plugins, CameraResultType
 } from '@capacitor/core';
-import { throwIfEmpty } from 'rxjs/operators';
-import { Image } from '../image.model';
+import { ImageService } from 'src/app/image.service';
 
-const { Camera, Filesystem, Storage } = Plugins;
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-movie-add',
@@ -21,7 +19,7 @@ export class MovieAddPage implements OnInit {
   private image;
   private selectedRating: number = 1;
 
-  constructor(private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
+  constructor(private moviesService: MoviesService, private router: Router, public toastController: ToastController, private imageService: ImageService) { }
 
   ngOnInit() {
   }
@@ -58,7 +56,7 @@ export class MovieAddPage implements OnInit {
       this.presentToast("You have to enter a title.", "danger");
       return
     }
-    const savedImageFile = await this.moviesService.savePicture(this.image);
+    const savedImageFile = await this.imageService.savePicture(this.image);
     this.moviesService.addMovie(title.value, this.selectedRating, description.value, savedImageFile);
     this.router.navigate(['/movies'])
   }

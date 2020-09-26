@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MoviesService } from './movies.service'
 import { Movie } from './movie.model'
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-movies',
