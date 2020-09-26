@@ -1,10 +1,14 @@
-#loginForm{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: calc(100vh - 56px);
-    position: relative;
-}
+.ionic-content {
+    --offset-bottom: 0 !important;
+ }
+
+// #loginForm{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     height: calc(100% - 56px);
+//     position: relative;
+// }
 
 .avatar-col{
     display: flex;
@@ -20,12 +24,6 @@ ion-avatar{
 
 a{
     text-decoration: none;
-}
-
-#forgotRow{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 #btnLogin{
