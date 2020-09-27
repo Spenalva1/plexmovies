@@ -54,13 +54,17 @@ export class AuthService {
     return user.emailVerified === true ? true : false;
   }
 
-  async register(email: string, password: string): Promise<User> {
-    try {
-      const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      await this.sendVerificationEmail();
-      return user;
-    } catch (error) {
-      this.errorToast(error.message);
+  async register(email: string, password: string, passwordConfirm: string): Promise<User> {
+    if (password !== passwordConfirm) {
+      this.errorToast("Passwords not match")
+    } else {
+      try {
+        const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
+        await this.sendVerificationEmail();
+        return user;
+      } catch (error) {
+        this.errorToast(error.message);
+      }
     }
   }
 

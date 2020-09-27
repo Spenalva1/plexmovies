@@ -13,9 +13,9 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() { }
 
-  async onRegister(email, password) {
+  async onRegister(email, password, passwordConfirm) {
     try {
-      const user = await this.authService.register(email.value, password.value);
+      const user = await this.authService.register(email.value, password.value, passwordConfirm.value);
       if (user) {
         this.router.navigate(['verify-email']);
       }
