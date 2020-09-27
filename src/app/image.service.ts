@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CameraPhoto, Capacitor, Filesystem, FilesystemDirectory } from '@capacitor/core';
+import { CameraPhoto, Capacitor, Plugins, FilesystemDirectory } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 import { Image } from "./image.model";
+
+const { Filesystem, Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root'

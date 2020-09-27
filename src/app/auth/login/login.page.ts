@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins, CameraResultType, FilesystemDirectory } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
-import { Image } from 'src/app/image.model';
 import { ImageService } from 'src/app/image.service';
 import { AuthService } from '../auth.service';
 

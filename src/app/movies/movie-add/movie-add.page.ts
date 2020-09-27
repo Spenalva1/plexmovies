@@ -5,7 +5,6 @@ import { MoviesService } from '../movies.service';
 import {
   Plugins, CameraResultType
 } from '@capacitor/core';
-import { ImageService } from 'src/app/image.service';
 
 const { Camera } = Plugins;
 
@@ -19,7 +18,7 @@ export class MovieAddPage implements OnInit {
   private image;
   private selectedRating: number = 1;
 
-  constructor(private moviesService: MoviesService, private router: Router, public toastController: ToastController, private imageService: ImageService) { }
+  constructor(private moviesService: MoviesService, private router: Router, public toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -56,7 +55,7 @@ export class MovieAddPage implements OnInit {
       this.presentToast("You have to enter a title.", "danger");
       return
     }
-    const savedImageFile = await this.imageService.savePicture(this.image);
+    const savedImageFile = await this.moviesService.savePicture(this.image);
     this.moviesService.addMovie(title.value, this.selectedRating, description.value, savedImageFile);
     this.router.navigate(['/movies'])
   }

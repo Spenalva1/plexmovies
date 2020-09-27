@@ -19,6 +19,7 @@ export class AppComponent {
 
   user$: Observable<User> = this.authService.afAuth.user;
   private avatar;
+  private avatarPath;
   avatarImg: string;
 
   constructor(
@@ -50,8 +51,8 @@ export class AppComponent {
   public async loadSavedAvatar() {
     const dataList = await Storage.get({ key: this.imageService.AVATAR_STORAGE });
     this.avatar = JSON.parse(dataList.value) || [];
-    if (this.avatar.length === 0) {
-      this.avatarImg = "../assets/default-avatar.png";
+    if (Array.isArray(this.avatar)) {
+      this.avatarPath = "../assets/default-avatar.png";
       return;
     }
     if (!this.platform.is('hybrid')) {
@@ -59,8 +60,24 @@ export class AppComponent {
         path: this.avatar.filepath,
         directory: FilesystemDirectory.Data
       });
-      this.avatar.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
+      this.avatarPath = `data:image/jpeg;base64,${readFile.data}`;
     }
-    this.avatarImg = this.avatar.webviewPath;
   }
+
+  // public async loadSavedAvatar() {
+  //   const dataList = await Storage.get({ key: this.imageService.AVATAR_STORAGE });
+  //   this.avatar = JSON.parse(dataList.value) || [];
+  //   if (this.avatar === "noAvatar") {
+  //     this.avatarImg = "../assets/default-avatar.png";
+  //     return;
+  //   }
+  //   if (!this.platform.is('hybrid')) {
+  //     const readFile = await Filesystem.readFile({
+  //       path: this.avatar.filepath,
+  //       directory: FilesystemDirectory.Data
+  //     });
+  //     this.avatar.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
+  //   }
+  //   this.avatarImg = this.avatar.webviewPath;
+  // }
 }
