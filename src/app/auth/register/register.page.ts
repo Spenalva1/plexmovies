@@ -9,9 +9,15 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterPage implements OnInit {
 
+  showPassword = false;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() { }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   async onRegister(email, password, passwordConfirm) {
     try {

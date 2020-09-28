@@ -13,13 +13,15 @@
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" #email required></ion-input>
     </ion-item>
-    <ion-item lines="full">
+    <ion-item lines="full" class="ion-align-items-center">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
+      <ion-input clearOnEdit="false" [type]="showPassword ? 'text' : 'password'" #password required></ion-input>
+      <ion-icon slot="end" class="showPasswordButton" [name]="showPassword ? 'eye-off' : 'eye'"
+        (click)="togglePassword()"></ion-icon>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Confirm Password</ion-label>
-      <ion-input type="password" #passwordConfirm required></ion-input>
+      <ion-input clearOnEdit="false" [type]="showPassword ? 'text' : 'password'" #passwordConfirm required></ion-input>
     </ion-item>
     <ion-row>
       <ion-col>

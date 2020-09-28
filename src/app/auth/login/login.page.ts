@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   private avatar;
   avatarImg: string;
   private platform: Platform;
+  showPassword = false;
 
   constructor(private authService: AuthService, private router: Router, private imageService: ImageService, platform: Platform) {
     this.platform = platform;
@@ -31,6 +32,10 @@ export class LoginPage implements OnInit {
     }
     this.avatar = undefined;
     this.avatarImg = "../../../assets/default-avatar.png";
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   async onLogin(email, password) {
